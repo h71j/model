@@ -1,4 +1,4 @@
-package product
+package order
 
 import (
 	"github.com/open4go/model"
