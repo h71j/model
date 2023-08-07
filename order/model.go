@@ -38,6 +38,7 @@ type Model struct {
 	ProductionedTime string             `json:"productioned_time" bson:"productioned_time"`
 	TypeCate         int                `json:"typeCate" bson:"typeCate"`
 	SendStatus       int                `json:"send_status" bson:"send_status"`
+	QueueIndex       int64              `json:"queue_index" bson:"queue_index"`
 
 	User     UserInfo       `json:"user"  bson:"user"`
 	Order    OrderInfo      `json:"order"  bson:"order"`
@@ -92,6 +93,7 @@ type StoreInfo struct {
 	Latitude  string `json:"latitude"`
 	Mobile    string `json:"mobile"`
 	Name      string `json:"name"`
+	StoreID   string `json:"store_id" bson:"store_id"`
 }
 type GoodInfo struct {
 	Number       int    `json:"number"`
