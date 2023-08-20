@@ -4,36 +4,73 @@ import (
 	"context"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
-	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
-// GetListDesc 获取列表
-// getList	GET http://my.api.url/posts?sort=["title","ASC"]&range=[0, 24]&filter={"title":"bar"}
-func (m *Model) GetListDesc(filter interface{}, d interface{}) (int64, error) {
+// GetByExternal 详情
+// GetByExternal	GET http://my.api.url/posts/123
+func (m *Model) GetByExternal(ctx context.Context, id string) (*Model, error) {
+	// TODO result using custom struct instead of bson.M
+	// because you should avoid to export something to customers
 	coll := m.Meta.Handler.Collection(m.Meta.Collection)
-	// 声明需要返回的列表
-	// 获取总数（含过滤规则）
-	totalCounter, err := coll.CountDocuments(context.TODO(), filter)
-	if err == mongo.ErrNoDocuments {
-		return 0, err
-	}
-
-	opt := options.Find()
-	// 排序方式
-	opt.SetSort(bson.M{"order.created_at": -1})
+	filter := bson.D{{Key: "external.open_id", Value: id}}
 
 	// 获取数据列表
-	cursor, err := coll.Find(m.Meta.Context, filter, opt)
-	if err == mongo.ErrNoDocuments {
-		return totalCounter, err
-	}
+	// 绑定查询结果
+	result := &Model{}
 
+	err := coll.FindOne(ctx, filter).Decode(&result)
 	if err != nil {
-		return totalCounter, err
+		return nil, err
+	}
+	return result, nil
+}
+
+// TopUp 充值
+func (m *Model) TopUp(ctx context.Context, id string, amount float64) (*mongo.UpdateResult, error) {
+	// TODO result using custom struct instead of bson.M
+	// because you should avoid to export something to customers
+	coll := m.Meta.Handler.Collection(m.Meta.Collection)
+	filter := bson.D{{Key: "external.open_id", Value: id}}
+
+	// 获取数据列表
+	// 绑定查询结果
+	oldResult := &Model{}
+	err := coll.FindOne(ctx, filter).Decode(&oldResult)
+	if err != nil {
+		return nil, err
 	}
 
-	if err = cursor.All(context.TODO(), d); err != nil {
-		return totalCounter, err
+	// 充值金额
+	oldResult.Assets.Balance = amount
+
+	updateResult, err := coll.UpdateOne(ctx, filter, bson.D{{Key: "$set", Value: oldResult}})
+	if err != nil {
+		return nil, err
 	}
-	return totalCounter, nil
+	return updateResult, nil
+}
+
+// Integrals 积分记录
+func (m *Model) Integrals(ctx context.Context, id string, pointNum int) (*mongo.UpdateResult, error) {
+	// TODO result using custom struct instead of bson.M
+	// because you should avoid to export something to customers
+	coll := m.Meta.Handler.Collection(m.Meta.Collection)
+	filter := bson.D{{Key: "external.open_id", Value: id}}
+
+	// 获取数据列表
+	// 绑定查询结果
+	oldResult := &Model{}
+	err := coll.FindOne(ctx, filter).Decode(&oldResult)
+	if err != nil {
+		return nil, err
+	}
+
+	// 充值金额
+	oldResult.Assets.PointNum = pointNum
+
+	updateResult, err := coll.UpdateOne(ctx, filter, bson.D{{Key: "$set", Value: oldResult}})
+	if err != nil {
+		return nil, err
+	}
+	return updateResult, nil
 }
