@@ -32,6 +32,8 @@ type Model struct {
 	Sex int `json:"sex" bson:"sex"`
 	// 地址
 	Address string `json:"address" bson:"address"`
+	// 门牌号
+	DoorNum string `json:"door_num" bson:"door_num"`
 	// 账号
 	AccountID string `json:"account_id" bson:"account_id"`
 	//
