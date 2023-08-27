@@ -11,7 +11,7 @@ import (
 func (m *Model) GetByExternal(ctx context.Context, id string) (*Model, error) {
 	// TODO result using custom struct instead of bson.M
 	// because you should avoid to export something to customers
-	coll := m.Meta.Handler.Collection(m.Meta.Collection)
+	coll := m.Context.Handler.Collection(m.Context.Collection)
 	filter := bson.D{{Key: "external.open_id", Value: id}}
 
 	// 获取数据列表
@@ -29,7 +29,7 @@ func (m *Model) GetByExternal(ctx context.Context, id string) (*Model, error) {
 func (m *Model) TopUp(ctx context.Context, id string, amount float64) (*mongo.UpdateResult, error) {
 	// TODO result using custom struct instead of bson.M
 	// because you should avoid to export something to customers
-	coll := m.Meta.Handler.Collection(m.Meta.Collection)
+	coll := m.Context.Handler.Collection(m.Context.Collection)
 	filter := bson.D{{Key: "external.open_id", Value: id}}
 
 	// 获取数据列表
@@ -54,7 +54,7 @@ func (m *Model) TopUp(ctx context.Context, id string, amount float64) (*mongo.Up
 func (m *Model) Integrals(ctx context.Context, id string, pointNum int) (*mongo.UpdateResult, error) {
 	// TODO result using custom struct instead of bson.M
 	// because you should avoid to export something to customers
-	coll := m.Meta.Handler.Collection(m.Meta.Collection)
+	coll := m.Context.Handler.Collection(m.Context.Collection)
 	filter := bson.D{{Key: "external.open_id", Value: id}}
 
 	// 获取数据列表
