@@ -10,7 +10,7 @@ import (
 // GetListDesc 获取列表
 // getList	GET http://my.api.url/posts?sort=["title","ASC"]&range=[0, 24]&filter={"title":"bar"}
 func (m *Model) GetListDesc(filter interface{}, d interface{}) (int64, error) {
-	coll := m.Meta.Handler.Collection(m.Meta.Collection)
+	coll := m.Context.Handler.Collection(m.Context.Collection)
 	// 声明需要返回的列表
 	// 获取总数（含过滤规则）
 	totalCounter, err := coll.CountDocuments(context.TODO(), filter)
@@ -23,7 +23,7 @@ func (m *Model) GetListDesc(filter interface{}, d interface{}) (int64, error) {
 	opt.SetSort(bson.M{"order.created_at": -1})
 
 	// 获取数据列表
-	cursor, err := coll.Find(m.Meta.Context, filter, opt)
+	cursor, err := coll.Find(m.Context.Context, filter, opt)
 	if err == mongo.ErrNoDocuments {
 		return totalCounter, err
 	}
