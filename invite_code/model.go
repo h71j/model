@@ -29,6 +29,12 @@ type Model struct {
 	Code string `json:"code" bson:"code"`
 	// 有效时间
 	ExpireAt string `json:"expire_at" bson:"expire_at"`
+
+	// 邀请者获取奖励数量
+	RewardCnt int `json:"reward_cnt" bson:"reward_cnt"`
+
+	// 邀请用户列表
+	Invitees []*Invitee `json:"invite_users" bson:"invite_users"`
 }
 
 // ResourceName 返回资源名称
@@ -39,4 +45,13 @@ func (m *Model) ResourceName() string {
 // CollectionName 返回表名称
 func (m *Model) CollectionName() string {
 	return collectionNamePrefix + modelName + collectionNameSuffix
+}
+
+// Invitee 被邀请的用户
+type Invitee struct {
+	// 用户id
+	AccountID string `json:"account_id"  bson:"account_id"`
+
+	// 创建时间
+	CreatedAt string `json:"created_at"  bson:"created_at"`
 }
