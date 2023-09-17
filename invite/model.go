@@ -1,4 +1,4 @@
-package address
+package invite
 
 import (
 	"github.com/open4go/model"
@@ -14,7 +14,7 @@ const (
 	// 例如, _log, _config, _flow,
 	collectionNameSuffix = "_info"
 	// 这个需要用户根据具体业务完成设定
-	modelName = "address"
+	modelName = "invite"
 )
 
 // Model 模型
@@ -24,26 +24,16 @@ type Model struct {
 	// 基本的数据库模型字段，一般情况所有model都应该包含如下字段
 	// 创建时（用户上传的数据为空，所以默认可以不传该值)
 	ID primitive.ObjectID `json:"id" bson:"_id,omitempty"`
-	// 收货人
-	AcceptName string `json:"accept_name" bson:"accept_name"`
-	// 手机号
-	Mobile string `json:"mobile"  bson:"mobile"`
-	// 性别
-	Sex int `json:"sex" bson:"sex"`
-	// 地址
-	Address string `json:"address" bson:"address"`
-	// 地址
-	AddressShotName string `json:"addressShotName" bson:"address_shot_name"`
-	// 经纬度
-	Latitude float64 `json:"latitude" bson:"latitude"`
-	// 经纬度
-	Longitude float64 `json:"longitude" bson:"longitude"`
-	// 门牌号
-	DoorNum string `json:"door_num" bson:"door_num"`
+	// 邀请码
+	InviteID string `json:"invite_id" bson:"invite_id"`
 	// 账号
 	AccountID string `json:"account_id" bson:"account_id"`
-	//
-	Inner bool `json:"inner"  bson:"inner"`
+	// 当前邀请任务的完成数量
+	InviteNum int `json:"invite_num" bson:"invite_num"`
+	// 被邀请的列表
+	Inviter []string `json:"inviter" bson:"inviter"`
+	// 邀请完成后成为朋友
+	Friends []string `json:"friends" bson:"friends"`
 }
 
 // ResourceName 返回资源名称
