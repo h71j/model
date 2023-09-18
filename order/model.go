@@ -46,6 +46,7 @@ type Model struct {
 	Store    StoreInfo      `json:"store"  bson:"store"`
 	Discount []DiscountInfo `json:"discount"  bson:"discount"`
 	Goods    []GoodInfo     `json:"goods" bson:"goods"`
+	TakeOut  TakeOut        `json:"take_out" bson:"goods"`
 }
 
 type UserInfo struct {
@@ -104,6 +105,20 @@ type GoodInfo struct {
 	Image        string `json:"image"`
 	Amount       string `json:"amount"`
 	Name         string `json:"name"`
+}
+
+// TakeOut 外卖订单信息
+type TakeOut struct {
+	ReturnCode string `json:"return_code"` // 外卖单号
+	PriceToken string `json:"price_token"` // 外卖价格token
+	Price      string `json:"price"`       // 跑腿费
+	Receiver   string `json:"receiver"`    // 收件人
+	RecPhone   string `json:"rec_phone"`   // 手机号码
+	Remark     string `json:"remark"`      // 备注
+	Address    string `json:"address"`     // 地址
+	Lng        string `json:"lng"`         // 经度
+	Lat        string `json:"lat"`         // 维度
+	Distance   string `json:"distance"`    // 距离
 }
 
 // ResourceName 返回资源名称
