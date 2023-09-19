@@ -46,7 +46,7 @@ type Model struct {
 	Store    StoreInfo      `json:"store"  bson:"store"`
 	Discount []DiscountInfo `json:"discount"  bson:"discount"`
 	Goods    []GoodInfo     `json:"goods" bson:"goods"`
-	TakeOut  TakeOut        `json:"take_out" bson:"goods"`
+	TakeOut  TakeOut        `json:"take_out" bson:"take_out"`
 }
 
 type UserInfo struct {
