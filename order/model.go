@@ -17,6 +17,17 @@ const (
 	modelName = "command"
 )
 
+const (
+	OrderStatusCreate   = 1 // 已下单
+	OrderStatusCooking  = 2 // 制餐中
+	OrderStatusGetOrder = 3 // 待取餐
+	OrderStatusTakeOut  = 4 // 已出餐/外派中
+	OrderStatusFinish   = 5 // 订单已完成
+	OrderStatusCancel   = 6 // 订单已取消
+	OrderStatusRefuse   = 7 // 订单已拒绝退款
+	OrderStatusRetund   = 8 // 订单已退款
+)
+
 // LbsInfo 地址
 type LbsInfo struct {
 	Address   string  `json:"address" bson:"address"`
@@ -47,6 +58,7 @@ type Model struct {
 	Discount []DiscountInfo `json:"discount"  bson:"discount"`
 	Goods    []GoodInfo     `json:"goods" bson:"goods"`
 	TakeOut  TakeOut        `json:"take_out" bson:"take_out"`
+	Applies  []*Apply       `json:"applies" bson:"applies"` // 申请记录：取消订单或退款
 }
 
 type UserInfo struct {
@@ -77,6 +89,7 @@ type PayInfo struct {
 	PayMode      string `json:"pay_mode" bson:"pay_mode"`
 	Amount       string `json:"amount"`
 	PayUserName  string `json:"pay_user_name" bson:"pay_user_name"`
+	Status       string `json:"status"` // 支付状态 0未支付 1已支付 2退款中 3已退款
 }
 
 type DiscountInfo struct {
@@ -119,6 +132,28 @@ type TakeOut struct {
 	Lng        string `json:"lng"`         // 经度
 	Lat        string `json:"lat"`         // 维度
 	Distance   string `json:"distance"`    // 距离
+}
+
+const (
+	// 审批类型
+	AuditStatusAgree  = "1"
+	AuditStatusRefuse = "2"
+
+	// 申请单状态
+	ApplyStatusApplying = "1" // 申请中
+	ApplyStatusFinish   = "2" // 已处理
+)
+
+// 申请记录
+type Apply struct {
+	ApplyId     string `json:"apply_id"`     // 申请单id
+	Type        string `json:"type"`         // 申请单类型：1取消订单 2退款
+	Status      string `json:"status"`       // 申请状态:  1待处理 2已审批
+	Audit       string `json:"audit"`        // 审批类型:  1同意 2退款
+	Amount      string `json:"amount"`       // 退款金额
+	Operator    string `json:"operator"`     // 处理人
+	Applier     string `json:"applier"`      // 申请发起人id, 用户或商户
+	ApplierType string `json:"applier_type"` // 发起人的用户类型 1用户 2商户
 }
 
 // ResourceName 返回资源名称
