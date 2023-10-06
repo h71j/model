@@ -62,6 +62,7 @@ type GoodsInfo struct {
 	ImageArr        []string       `json:"imageArr"`
 	MembershipPrice int            `json:"membership_price" bson:"membership_price"`
 	UseProperty     int            `json:"use_property" bson:"use_property"`
+	IsUseProperty   bool           `json:"is_use_property" bson:"is_use_property"`
 	UnitType        int            `json:"unit_type" bson:"unit_type"`
 	MinBuyNum       int            `json:"min_buy_num" bson:"min_buy_num"`
 	Specs           []struct {
