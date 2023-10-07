@@ -40,6 +40,8 @@ type Model struct {
 	IsSell          bool        `json:"is_sell" bson:"is_sell"`
 	Icon            string      `json:"icon"`
 	Goods           []GoodsInfo `json:"goods_list" bson:"goods_list"`
+	// 发布到的门店
+	Stores []string `json:"stores" bson:"stores"`
 }
 
 type GoodsInfo struct {

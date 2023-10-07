@@ -50,6 +50,8 @@ type Model struct {
 	CallNumber string `json:"callNumber" bson:"callNumber"`
 	// 地址
 	Lbs LbsInfo `json:"lbs" bson:"lbs"`
+	// 当前门店拥有的产品
+	Product []string `json:"product" bson:"product"`
 }
 
 // ResourceName 返回资源名称
