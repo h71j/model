@@ -25,7 +25,7 @@ type LbsInfo struct {
 	AreaName  string  `json:"areaName"  bson:"areaName"`
 }
 
-// Model 门店信息
+// Model 商品信息
 type Model struct {
 	// 模型继承
 	model.Model `json:"-" bson:"-"`
@@ -42,6 +42,8 @@ type Model struct {
 	Goods           []GoodsInfo `json:"goods_list" bson:"goods_list"`
 	// 发布到的门店
 	Stores []string `json:"stores" bson:"stores"`
+	// 更新方式
+	UpdateType int `json:"update_type" bson:"update_type"`
 }
 
 type GoodsInfo struct {
