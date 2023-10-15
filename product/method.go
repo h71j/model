@@ -9,12 +9,12 @@ import (
 func (m *Model) GetByStoreID(id string) ([]*Model, error) {
 
 	results := make([]*Model, 0)
-	coll := m.Meta.Handler.Collection(m.Meta.Collection)
+	coll := m.Context.Handler.Collection(m.Context.Collection)
 	objID, _ := primitive.ObjectIDFromHex(id)
 	filter := bson.D{{Key: "meta.merchant_id", Value: objID}}
 
 	// 获取数据列表
-	cursor, err := coll.Find(m.Meta.Context, filter)
+	cursor, err := coll.Find(m.Context.Context, filter)
 	if err == mongo.ErrNoDocuments {
 		return nil, err
 	}
@@ -23,7 +23,7 @@ func (m *Model) GetByStoreID(id string) ([]*Model, error) {
 		return nil, err
 	}
 
-	if err = cursor.All(m.Meta.Context, &results); err != nil {
+	if err = cursor.All(m.Context.Context, &results); err != nil {
 		return nil, err
 	}
 	return results, nil

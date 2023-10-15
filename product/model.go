@@ -25,7 +25,7 @@ type LbsInfo struct {
 	AreaName  string  `json:"areaName"  bson:"areaName"`
 }
 
-// Model 门店信息
+// Model 商品信息
 type Model struct {
 	// 模型继承
 	model.Model `json:"-" bson:"-"`
@@ -40,6 +40,10 @@ type Model struct {
 	IsSell          bool        `json:"is_sell" bson:"is_sell"`
 	Icon            string      `json:"icon"`
 	Goods           []GoodsInfo `json:"goods_list" bson:"goods_list"`
+	// 发布到的门店
+	Stores []string `json:"stores" bson:"stores"`
+	// 更新方式
+	UpdateType int `json:"update_type" bson:"update_type"`
 }
 
 type GoodsInfo struct {
@@ -62,6 +66,7 @@ type GoodsInfo struct {
 	ImageArr        []string       `json:"imageArr"`
 	MembershipPrice int            `json:"membership_price" bson:"membership_price"`
 	UseProperty     int            `json:"use_property" bson:"use_property"`
+	IsUseProperty   bool           `json:"is_use_property" bson:"is_use_property"`
 	UnitType        int            `json:"unit_type" bson:"unit_type"`
 	MinBuyNum       int            `json:"min_buy_num" bson:"min_buy_num"`
 	Specs           []struct {
