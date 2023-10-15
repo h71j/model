@@ -78,6 +78,8 @@ type OrderInfo struct {
 	SortNum     string `json:"sort_num" bson:"sort_num"`
 	OrderNo     string `json:"order_no" bson:"order_no"`
 	StatusText  string `json:"status_text" bson:"status_text"`
+	// 取餐模式：take-out外卖、in-store堂食、pack：打包自提
+	PickupMode string `form:"pickup_mode" json:"pickup_mode" xml:"pickup_mode"`
 }
 
 type PayInfo struct {
