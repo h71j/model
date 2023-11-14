@@ -26,6 +26,7 @@ const (
 	OrderStatusCancel   = 6 // 订单已取消
 	OrderStatusRefuse   = 7 // 订单已拒绝退款
 	OrderStatusRetund   = 8 // 订单已退款
+	OrderStatusRetund   = 9 // 订单待审批
 )
 
 // LbsInfo 地址
