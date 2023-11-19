@@ -7,7 +7,7 @@ type Qrcode struct {
 	//// 门店id
 	//StoreID string `json:"store_id" `
 	// 桌子id 餐桌号
-	TableID string `json:"table_id"  bson:"scene_id"`
+	TableID string `json:"table_id"  bson:"table_id"`
 	// 二维码图片地址
 	Url string `json:"url" bson:"url"`
 }
