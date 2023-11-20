@@ -24,13 +24,6 @@ type Model struct {
 	// 基本的数据库模型字段，一般情况所有model都应该包含如下字段
 	// 创建时（用户上传的数据为空，所以默认可以不传该值)
 	ID              primitive.ObjectID `json:"id" bson:"_id,omitempty"`
-	SellTimeStatus  int                `json:"sell_time_status" bson:"sell_time_status"`
-	IsSell          bool               `json:"is_sell" bson:"is_sell"`
-	PackCost        string             `json:"pack_cost" bson:"pack_cost"`
-	Sales           int                `json:"sales"`
-	GoodsType       int                `json:"goods_type" bson:"goods_type"`
-	CoverImg        string             `json:"cover_img" bson:"cover_img"`
-	Property        []PropertyInfo     `json:"property"`
 	GoodsMealsInfo  []interface{}      `json:"goods_meals_info,omitempty" bson:"goods_meals_info"`
 	IsAdd           int                `json:"is_add,omitempty" bson:"is_add"`
 	UseSpec         bool               `json:"use_spec" bson:"use_spec"`
@@ -41,11 +34,10 @@ type Model struct {
 	Unit            string             `json:"unit"`
 	ImageArr        []string           `json:"imageArr"`
 	MembershipPrice int                `json:"membership_price" bson:"membership_price"`
-	UseProperty     int                `json:"use_property" bson:"use_property"`
-	IsUseProperty   bool               `json:"is_use_property" bson:"is_use_property"`
-	UnitType        int                `json:"unit_type" bson:"unit_type"`
-	MinBuyNum       int                `json:"min_buy_num" bson:"min_buy_num"`
-	Specs           []struct {
+
+	UnitType  int `json:"unit_type" bson:"unit_type"`
+	MinBuyNum int `json:"min_buy_num" bson:"min_buy_num"`
+	Specs     []struct {
 		Values []struct {
 			Id    int         `json:"id"`
 			Image interface{} `json:"image"`
@@ -54,13 +46,26 @@ type Model struct {
 		Name string `json:"name"`
 		Id   int    `json:"id"`
 	} `json:"specs"`
-	Content      string `json:"content"`
 	IsFollowSuit int    `json:"is_follow_suit,omitempty"`
 	Stock        string `json:"stock"`
 	Type         int    `json:"type"`
 	IsLabel      int    `json:"is_label"`
-	Name         string `json:"name"`
-	Images       string `json:"images"`
+
+	// 销售属性
+	SellTimeStatus int    `json:"sell_time_status" bson:"sell_time_status"`
+	IsSell         bool   `json:"is_sell" bson:"is_sell"`
+	PackCost       string `json:"pack_cost" bson:"pack_cost"`
+	Sales          int    `json:"sales"`
+
+	// 商品本身属性
+	Name          string         `json:"name"`
+	Images        string         `json:"images"`
+	GoodsType     int            `json:"goods_type" bson:"goods_type"`
+	CoverImg      string         `json:"cover_img" bson:"cover_img"`
+	Content       string         `json:"content"`
+	UseProperty   int            `json:"use_property" bson:"use_property"`
+	IsUseProperty bool           `json:"is_use_property" bson:"is_use_property"`
+	Property      []PropertyInfo `json:"property"`
 }
 
 type PropertyInfo struct {
