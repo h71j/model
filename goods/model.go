@@ -23,62 +23,69 @@ type Model struct {
 	model.Model `json:"-" bson:"-"`
 	// 基本的数据库模型字段，一般情况所有model都应该包含如下字段
 	// 创建时（用户上传的数据为空，所以默认可以不传该值)
-	ID              primitive.ObjectID `json:"id" bson:"_id,omitempty"`
-	GoodsMealsInfo  []interface{}      `json:"goods_meals_info,omitempty" bson:"goods_meals_info"`
-	IsAdd           int                `json:"is_add,omitempty" bson:"is_add"`
-	UseSpec         bool               `json:"use_spec" bson:"use_spec"`
-	Entity          []EntityInfo       `json:"entity"`
-	StallCode       string             `json:"stall_code" bson:"stall_code"`
-	Sort            int                `json:"sort"`
-	Price           float64            `json:"price"`
-	Unit            string             `json:"unit"`
-	ImageArr        []string           `json:"imageArr"`
-	MembershipPrice int                `json:"membership_price" bson:"membership_price"`
-
-	UnitType  int `json:"unit_type" bson:"unit_type"`
-	MinBuyNum int `json:"min_buy_num" bson:"min_buy_num"`
-	Specs     []struct {
-		Values []struct {
-			Id    int         `json:"id"`
-			Image interface{} `json:"image"`
-			Value string      `json:"value"`
-		} `json:"values"`
-		Name string `json:"name"`
-		Id   int    `json:"id"`
-	} `json:"specs"`
-	IsFollowSuit int    `json:"is_follow_suit,omitempty"`
-	Stock        string `json:"stock"`
-	Type         int    `json:"type"`
-	IsLabel      int    `json:"is_label"`
+	ID             primitive.ObjectID `json:"id" bson:"_id,omitempty"`
+	GoodsMealsInfo []interface{}      `json:"goods_meals_info,omitempty" bson:"goods_meals_info"`
+	IsAdd          int                `json:"is_add,omitempty" bson:"is_add"`
+	UseSpec        bool               `json:"use_spec" bson:"use_spec"`
+	Entity         []EntityInfo       `json:"entity"`
+	StallCode      string             `json:"stall_code" bson:"stall_code"`
+	Specs          []SpecsInfo        `json:"specs"`
+	IsFollowSuit   int                `json:"is_follow_suit,omitempty"`
+	IsLabel        int                `json:"is_label"`
 
 	// 销售属性
-	SellTimeStatus int    `json:"sell_time_status" bson:"sell_time_status"`
-	IsSell         bool   `json:"is_sell" bson:"is_sell"`
-	PackCost       string `json:"pack_cost" bson:"pack_cost"`
-	Sales          int    `json:"sales"`
+	SellTimeStatus  int     `json:"sell_time_status" bson:"sell_time_status"`
+	IsSell          bool    `json:"is_sell" bson:"is_sell"`
+	PackCost        string  `json:"pack_cost" bson:"pack_cost"`
+	UnitType        int     `json:"unit_type" bson:"unit_type"`
+	Sort            int     `json:"sort"`
+	Price           float64 `json:"price"`
+	Unit            string  `json:"unit"`
+	MembershipPrice int     `json:"membership_price" bson:"membership_price"`
 
 	// 商品本身属性
 	Name          string         `json:"name"`
-	Images        string         `json:"images"`
+	Type          int            `json:"type"`
 	GoodsType     int            `json:"goods_type" bson:"goods_type"`
-	CoverImg      string         `json:"cover_img" bson:"cover_img"`
 	Content       string         `json:"content"`
 	UseProperty   int            `json:"use_property" bson:"use_property"`
 	IsUseProperty bool           `json:"is_use_property" bson:"is_use_property"`
 	Property      []PropertyInfo `json:"property"`
+
+	// 统计数据 & 限制
+	Sales     int    `json:"sales"`
+	Stock     string `json:"stock"`
+	MinBuyNum int    `json:"min_buy_num" bson:"min_buy_num"`
+
+	// 展示
+	Images   string   `json:"images"`
+	CoverImg string   `json:"cover_img" bson:"cover_img"`
+	ImageArr []string `json:"imageArr"`
+}
+
+type SpecsInfo struct {
+	Values []struct {
+		Id    int         `json:"id"`
+		Image interface{} `json:"image"`
+		Value string      `json:"value"`
+	} `json:"values"`
+	Name string `json:"name"`
+	Id   int    `json:"id"`
 }
 
 type PropertyInfo struct {
-	IsOpenCheckbox bool `json:"is_open_checkbox"`
-	Id             int  `json:"id"`
-	Values         []struct {
-		IsDefault int    `json:"is_default,omitempty"`
-		Id        int    `json:"id"`
-		Code      string `json:"code"`
-		Value     string `json:"value"`
-	} `json:"values"`
-	Name string  `json:"name"`
-	Desc *string `json:"desc,omitempty"`
+	IsOpenCheckbox bool              `json:"is_open_checkbox"`
+	Id             int               `json:"id"`
+	Values         []PropertySetting `json:"values"`
+	Name           string            `json:"name"`
+	Desc           *string           `json:"desc,omitempty"`
+}
+
+type PropertySetting struct {
+	IsDefault int    `json:"is_default,omitempty"`
+	Id        int    `json:"id"`
+	Code      string `json:"code"`
+	Value     string `json:"value"`
 }
 
 type EntityInfo struct {
