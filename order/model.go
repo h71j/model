@@ -26,6 +26,7 @@ const (
 	OrderStatusCancel   = 6 // 订单已取消
 	OrderStatusRefuse   = 7 // 订单已拒绝退款
 	OrderStatusRetund   = 8 // 订单已退款
+	OrderStatusRetund   = 9 // 订单待审批
 )
 
 // LbsInfo 地址
@@ -78,18 +79,26 @@ type OrderInfo struct {
 	SortNum     string `json:"sort_num" bson:"sort_num"`
 	OrderNo     string `json:"order_no" bson:"order_no"`
 	StatusText  string `json:"status_text" bson:"status_text"`
+	// 取餐模式：take-out外卖、in-store堂食、pack：打包自提
+	PickupMode string `form:"pickup_mode" json:"pickup_mode" xml:"pickup_mode"`
 }
 
 type PayInfo struct {
-	CouponAmount string `json:"coupon_amount"  bson:"coupon_amount"`
-	PayedAt      int    `json:"payed_at" bson:"payed_at"`
-	TotalAmount  string `json:"total_amount" bson:"total_amount"`
-	CouponName   string `json:"coupon_name" bson:"coupon_name"`
-	ReceiveAt    int    `json:"receive_at" bson:"receive_at"`
-	PayMode      string `json:"pay_mode" bson:"pay_mode"`
-	Amount       string `json:"amount"`
-	PayUserName  string `json:"pay_user_name" bson:"pay_user_name"`
-	Status       string `json:"status"` // 支付状态 0未支付 1已支付 2退款中 3已退款
+	CouponAmount string  `json:"coupon_amount"  bson:"coupon_amount"`
+	PayedAt      int     `json:"payed_at" bson:"payed_at"`
+	TotalAmount  string  `json:"total_amount" bson:"total_amount"`
+	CouponName   string  `json:"coupon_name" bson:"coupon_name"`
+	ReceiveAt    int     `json:"receive_at" bson:"receive_at"`
+	PayMode      string  `json:"pay_mode" bson:"pay_mode"`
+	Amount       string  `json:"amount"`
+	PayUserName  string  `json:"pay_user_name" bson:"pay_user_name"`
+	Status       string  `json:"status"` // 支付状态 0未支付 1已支付 2退款中 3已退款
+	WxTrade      WxTrade `json:"wx_trade"`
+}
+
+// WxTrade 微信支付返回信息
+type WxTrade struct {
+	TransactionId string `json:"transaction_id"`
 }
 
 type DiscountInfo struct {

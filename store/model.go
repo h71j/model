@@ -52,6 +52,8 @@ type Model struct {
 	Lbs LbsInfo `json:"lbs" bson:"lbs"`
 	// 当前门店拥有的产品
 	Product []string `json:"product" bson:"product"`
+	// 门店的餐桌二维码
+	TableQrCodes []Qrcode `json:"table_qrcodes"  bson:"table_qrcodes"`
 }
 
 // ResourceName 返回资源名称
