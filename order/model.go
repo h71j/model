@@ -18,15 +18,15 @@ const (
 )
 
 const (
-	OrderStatusCreate   = 1 // 已下单
-	OrderStatusCooking  = 2 // 制餐中
-	OrderStatusGetOrder = 3 // 待取餐
-	OrderStatusTakeOut  = 4 // 已出餐/外派中
-	OrderStatusFinish   = 5 // 订单已完成
-	OrderStatusCancel   = 6 // 订单已取消
-	OrderStatusRefuse   = 7 // 订单已拒绝退款
-	OrderStatusRetund   = 8 // 订单已退款
-	OrderStatusRetund   = 9 // 订单待审批
+	OrderStatusCreate     = 1 // 已下单
+	OrderStatusCooking    = 2 // 制餐中
+	OrderStatusGetOrder   = 3 // 待取餐
+	OrderStatusTakeOut    = 4 // 已出餐/外派中
+	OrderStatusFinish     = 5 // 订单已完成
+	OrderStatusCancel     = 6 // 订单已取消
+	OrderStatusRefuse     = 7 // 订单已拒绝退款
+	OrderStatusRetund     = 8 // 订单已退款
+	OrderStatusRetundDone = 9 // 订单待审批
 )
 
 // LbsInfo 地址
