@@ -47,6 +47,9 @@ type Model struct {
 	Unit            string  `json:"unit"`
 	MembershipPrice int     `json:"membership_price" bson:"membership_price"`
 
+	// 发布属性
+	PublishClient []string `json:"publish_client" bson:"publish_client"`
+
 	// 商品本身属性
 	Name          string         `json:"name"`
 	Type          int            `json:"type"`
