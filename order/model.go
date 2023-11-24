@@ -117,6 +117,7 @@ type StoreInfo struct {
 	Mobile    string `json:"mobile"`
 	Name      string `json:"name"`
 	StoreID   string `json:"store_id" bson:"store_id"`
+	TableID   string `json:"table_id"` // 下单所关联的门店餐桌id
 }
 type GoodInfo struct {
 	Number       int    `json:"number"`
