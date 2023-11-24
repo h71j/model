@@ -3,6 +3,7 @@ package goods
 import (
 	"github.com/open4go/model"
 	"go.mongodb.org/mongo-driver/bson/primitive"
+	"time"
 )
 
 const (
@@ -24,6 +25,9 @@ type Model struct {
 	// 基本的数据库模型字段，一般情况所有model都应该包含如下字段
 	// 创建时（用户上传的数据为空，所以默认可以不传该值)
 	ID             primitive.ObjectID `json:"id" bson:"_id,omitempty"`
+	ProductID      int64              `json:"product_id" bson:"product_id"`
+	CreatedAt      time.Time          `json:"created_at" bson:"created_at"`
+	UpdatedAt      time.Time          `json:"updated_at" bson:"updated_at"`
 	GoodsMealsInfo []interface{}      `json:"goods_meals_info,omitempty" bson:"goods_meals_info"`
 	IsAdd          int                `json:"is_add,omitempty" bson:"is_add"`
 	UseSpec        bool               `json:"use_spec" bson:"use_spec"`
