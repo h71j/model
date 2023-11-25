@@ -36,7 +36,7 @@ type Model struct {
 	Specs          []SpecsInfo        `json:"specs"`
 	IsFollowSuit   int                `json:"is_follow_suit,omitempty"`
 	IsLabel        int                `json:"is_label"`
-
+	ProductList    []ProductConfig    `json:"product_list" bson:"product_list"`
 	// 销售属性
 	SellTimeStatus  int     `json:"sell_time_status" bson:"sell_time_status"`
 	IsSell          bool    `json:"is_sell" bson:"is_sell"`
@@ -106,6 +106,15 @@ type EntityInfo struct {
 	Num             int         `json:"num"`
 	Price           float64     `json:"price"`
 	MembershipPrice int         `json:"membership_price"  bson:"membership_price"`
+}
+
+type ProductConfig struct {
+	// Sales 销量
+	Sales int `json:"sales"`
+	// Stock 库存
+	Stock int `json:"stock"`
+	// GoodsId
+	GoodsId []string `json:"goods_id"  bson:"goods_id"`
 }
 
 // ResourceName 返回资源名称
