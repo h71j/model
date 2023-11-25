@@ -25,17 +25,27 @@ type Model struct {
 	// 创建时（用户上传的数据为空，所以默认可以不传该值)
 	ID primitive.ObjectID `json:"id" bson:"_id,omitempty"`
 
-	Name            string   `json:"name"`
-	IsShowBackstage int      `json:"is_show_backstage" bson:"is_show_backstage"`
-	Sort            int      `json:"sort"`
-	GoodsType       int      `json:"goods_type"  bson:"goods_type"`
-	IsSell          bool     `json:"is_sell" bson:"is_sell"`
-	Icon            string   `json:"icon"`
-	Goods           []string `json:"goods_list" bson:"goods_list"`
+	Name            string          `json:"name"`
+	IsShowBackstage int             `json:"is_show_backstage" bson:"is_show_backstage"`
+	Sort            int             `json:"sort"`
+	GoodsType       int             `json:"goods_type"  bson:"goods_type"`
+	IsSell          bool            `json:"is_sell" bson:"is_sell"`
+	Icon            string          `json:"icon"`
+	Goods           []string        `json:"goods_list" bson:"goods_list"`
+	ProductList     []ProductConfig `json:"product_list" bson:"product_list"`
 	// 发布到的门店
 	Stores []string `json:"stores" bson:"stores"`
 	// 更新方式
 	UpdateType int `json:"update_type" bson:"update_type"`
+}
+
+type ProductConfig struct {
+	// Sales 销量
+	Sales int `json:"sales"`
+	// Stock 库存
+	Stock int `json:"stock"`
+	// GoodsId
+	GoodsId []string `json:"goods_id"  bson:"goods_id"`
 }
 
 // ResourceName 返回资源名称
