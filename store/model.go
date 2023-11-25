@@ -54,6 +54,8 @@ type Model struct {
 	Product []string `json:"product" bson:"product"`
 	// 门店的餐桌二维码
 	TableQrCodes []Qrcode `json:"table_qrcodes"  bson:"table_qrcodes"`
+	// ProductList 当前产品列表
+	ProductList []string `json:"product_list" bson:"product_list"`
 }
 
 // ResourceName 返回资源名称
