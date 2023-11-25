@@ -25,6 +25,12 @@ type LbsInfo struct {
 	AreaName  string  `json:"areaName"  bson:"areaName"`
 }
 
+// ShopTimeSetting 营业时间
+type ShopTimeSetting struct {
+	BeginTime string `json:"begin_time" bson:"begin_time"`
+	EndTime   string `json:"end_time" bson:"end_time"`
+}
+
 // Model 门店信息
 type Model struct {
 	// 模型继承
@@ -44,8 +50,10 @@ type Model struct {
 	Name string `json:"name" bson:"name"`
 	// Distance 根据用户当前位置计算出的结果
 	Distance float64 `json:"distance" bson:"-"`
-	// 门店营业时间
+	// 门店营业时间(客户端展示）
 	ShopTime string `json:"shopTime" bson:"shopTime"`
+	// ShopTimeSetting 门店营业时间
+	ShopTimeInfo ShopTimeSetting `json:"shop_time_info" bson:"shop_time_info"`
 	// 门店电话
 	CallNumber string `json:"callNumber" bson:"callNumber"`
 	// 地址
@@ -54,7 +62,7 @@ type Model struct {
 	Product []string `json:"product" bson:"product"`
 	// 门店的餐桌二维码
 	TableQrCodes []Qrcode `json:"table_qrcodes"  bson:"table_qrcodes"`
-	// ProductList 当前产品列表
+	// ProductList 当前菜谱列表
 	ProductList []string `json:"product_list" bson:"product_list"`
 }
 
