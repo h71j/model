@@ -45,7 +45,7 @@ type ProductConfig struct {
 	// Stock 库存
 	Stock int `json:"stock"`
 	// GoodsId
-	GoodsId []string `json:"goods_id"  bson:"goods_id"`
+	GoodsId string `json:"goods_id"  bson:"goods_id"`
 }
 
 // ResourceName 返回资源名称
