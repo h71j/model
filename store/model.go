@@ -70,8 +70,8 @@ type MenuConfig struct {
 	Sales int `json:"sales"`
 	// Stock 库存
 	Stock int `json:"stock"`
-	// GoodsId
-	GoodsId string `json:"menu_id"  bson:"menu_id"`
+	// MenuID
+	MenuID string `json:"menu_id"  bson:"menu_id"`
 }
 
 // ResourceName 返回资源名称
