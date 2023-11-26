@@ -61,9 +61,17 @@ type Model struct {
 	// 当前门店拥有的产品
 	Product []string `json:"product" bson:"product"`
 	// 门店的餐桌二维码
-	TableQrCodes []Qrcode `json:"table_qrcodes"  bson:"table_qrcodes"`
-	// ProductList 当前菜谱列表
-	ProductList []string `json:"product_list" bson:"product_list"`
+	TableQrCodes []Qrcode     `json:"table_qrcodes"  bson:"table_qrcodes"`
+	MenuList     []MenuConfig `json:"menu_list" bson:"menu_list"`
+}
+
+type MenuConfig struct {
+	// Sales 销量
+	Sales int `json:"sales"`
+	// Stock 库存
+	Stock int `json:"stock"`
+	// GoodsId
+	GoodsId string `json:"menu_id"  bson:"menu_id"`
 }
 
 // ResourceName 返回资源名称

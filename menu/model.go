@@ -25,21 +25,22 @@ type Model struct {
 	// 创建时（用户上传的数据为空，所以默认可以不传该值)
 	ID primitive.ObjectID `json:"id" bson:"_id,omitempty"`
 
-	Name            string          `json:"name"`
-	IsShowBackstage int             `json:"is_show_backstage" bson:"is_show_backstage"`
-	Sort            int             `json:"sort"`
-	GoodsType       int             `json:"goods_type"  bson:"goods_type"`
-	IsSell          bool            `json:"is_sell" bson:"is_sell"`
-	Icon            string          `json:"icon"`
-	Goods           []string        `json:"goods_list" bson:"goods_list"`
-	ProductList     []ProductConfig `json:"product_list" bson:"product_list"`
+	Name            string `json:"name"`
+	IsShowBackstage int    `json:"is_show_backstage" bson:"is_show_backstage"`
+	Sort            int    `json:"sort"`
+	GoodsType       int    `json:"goods_type"  bson:"goods_type"`
+	IsSell          bool   `json:"is_sell" bson:"is_sell"`
+	Icon            string `json:"icon"`
+	// 即将废弃 goods_list
+	Goods     []string      `json:"goods_list" bson:"goods_list"`
+	GoodsList []GoodsConfig `json:"goods_list_v2" bson:"goods_list_v2"`
 	// 发布到的门店
 	Stores []string `json:"stores" bson:"stores"`
 	// 更新方式
 	UpdateType int `json:"update_type" bson:"update_type"`
 }
 
-type ProductConfig struct {
+type GoodsConfig struct {
 	// Sales 销量
 	Sales int `json:"sales"`
 	// Stock 库存
