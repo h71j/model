@@ -36,7 +36,7 @@ type Model struct {
 	Goods     []string      `json:"goods_list" bson:"goods_list"`
 	GoodsList []GoodsConfig `json:"goods_list_v2" bson:"goods_list_v2"`
 	// GoodsDisplay 货物展示 不存储
-	GoodsDisplay []goods.Model `json:"goods_display" bson:"-"`
+	GoodsDisplay []*goods.Model `json:"goods_display" bson:"-"`
 	// 发布到的门店
 	Stores []string `json:"stores" bson:"stores"`
 	// 更新方式
