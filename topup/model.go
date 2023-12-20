@@ -3,6 +3,7 @@ package topup
 import (
 	"github.com/open4go/model"
 	"go.mongodb.org/mongo-driver/bson/primitive"
+	"time"
 )
 
 const (
@@ -27,14 +28,14 @@ type Model struct {
 	Sales      int                `json:"sales"   bson:"sales"`
 	Image      string             `json:"image"   bson:"image"`
 	Value      string             `json:"value"   bson:"value"`
-	DeletedAt  interface{}        `json:"deleted_at"   bson:"deleted_at"`
+	DeletedAt  time.Time          `json:"deleted_at"   bson:"deleted_at"`
 	Sort       int                `json:"sort"   bson:"sort"`
 	StatusText string             `json:"status_text"   bson:"status_text"`
 	Status     int                `json:"status"   bson:"status"`
-	CreatedAt  string             `json:"created_at"   bson:"created_at"`
+	CreatedAt  time.Time          `json:"created_at"   bson:"created_at"`
 	Desc       string             `json:"desc"   bson:"desc"`
 	StoreId    int                `json:"store_id"   bson:"store_id"`
-	Gifts      []interface{}      `json:"gifts"   bson:"gifts"`
+	Gifts      []string           `json:"gifts"   bson:"gifts"`
 	Type       int                `json:"type"   bson:"type"`
 	FullImage  string             `json:"full_image"   bson:"full_image"`
 	Name       string             `json:"name"   bson:"name"`
