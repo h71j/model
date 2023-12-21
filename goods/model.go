@@ -59,9 +59,9 @@ type Model struct {
 	Property      []PropertyInfo `json:"property"`
 
 	// 统计数据 & 限制
-	Sales     int    `json:"sales"`
-	Stock     string `json:"stock"`
-	MinBuyNum int    `json:"min_buy_num" bson:"min_buy_num"`
+	Sales     int `json:"sales"`
+	Stock     int `json:"stock"`
+	MinBuyNum int `json:"min_buy_num" bson:"min_buy_num"`
 
 	// 展示
 	Images   string   `json:"images"`
