@@ -88,10 +88,11 @@ type PropertyInfo struct {
 }
 
 type PropertySetting struct {
-	IsDefault int    `json:"is_default,omitempty"`
-	Id        int    `json:"id"`
-	Code      string `json:"code"`
-	Value     string `json:"value"`
+	IsDefault int     `json:"is_default,omitempty"`
+	Id        int     `json:"id"`
+	Code      string  `json:"code"`
+	Value     string  `json:"value"`
+	Price     float64 `json:"price"`
 }
 
 type EntityInfo struct {
