@@ -120,6 +120,7 @@ type StoreInfo struct {
 	TableID   string `json:"table_id"` // 下单所关联的门店餐桌id
 }
 type GoodInfo struct {
+	Id           int    `json:"id"`
 	Number       int    `json:"number"`
 	OriginAmount string `json:"origin_amount"  bson:"origin_amount"`
 	Price        string `json:"price"`
