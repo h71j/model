@@ -2,6 +2,7 @@ package order
 
 import (
 	"github.com/open4go/model"
+	"github.com/open4go/req5rsp/cst"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
@@ -68,17 +69,17 @@ type UserInfo struct {
 }
 
 type OrderInfo struct {
-	UpdatedAt   int    `json:"updated_at" bson:"updated_at"`
-	GoodsNum    int    `json:"goods_num" bson:"goods_num"`
-	Status      int    `json:"status" bson:"status"`
-	CompletedAt int    `json:"completed_at" bson:"completed_at"`
-	CreatedAt   int    `json:"created_at" bson:"created_at"`
-	SendedTime  int    `json:"sended_time" bson:"sended_time"`
-	Remark      string `json:"remark"`
-	Postscript  string `json:"postscript" bson:"postscript"`
-	SortNum     string `json:"sort_num" bson:"sort_num"`
-	OrderNo     string `json:"order_no" bson:"order_no"`
-	StatusText  string `json:"status_text" bson:"status_text"`
+	UpdatedAt   int             `json:"updated_at" bson:"updated_at"`
+	GoodsNum    int             `json:"goods_num" bson:"goods_num"`
+	Status      cst.OrderStatus `json:"status" bson:"status"`
+	CompletedAt int             `json:"completed_at" bson:"completed_at"`
+	CreatedAt   int             `json:"created_at" bson:"created_at"`
+	SendedTime  int             `json:"sended_time" bson:"sended_time"`
+	Remark      string          `json:"remark"`
+	Postscript  string          `json:"postscript" bson:"postscript"`
+	SortNum     string          `json:"sort_num" bson:"sort_num"`
+	OrderNo     string          `json:"order_no" bson:"order_no"`
+	StatusText  string          `json:"status_text" bson:"status_text"`
 	// 取餐模式：take-out外卖、in-store堂食、pack：打包自提
 	PickupMode string `form:"pickup_mode" json:"pickup_mode" xml:"pickup_mode"`
 }

@@ -1,11 +1,12 @@
 module github.com/h71j/model
 
-go 1.20
+go 1.21.5
 
 require (
 	github.com/gin-gonic/gin v1.9.1
 	github.com/google/uuid v1.3.0
 	github.com/open4go/model v0.0.6
+	github.com/open4go/req5rsp v0.0.4
 	github.com/r2day/base v1.6.7
 	github.com/r2day/db v0.3.5
 	github.com/redis/go-redis/v9 v9.0.5
