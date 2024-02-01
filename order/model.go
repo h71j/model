@@ -100,6 +100,14 @@ type PayInfo struct {
 // WxTrade 微信支付返回信息
 type WxTrade struct {
 	TransactionId string `json:"transaction_id"`
+	// NonceStr 随机字符串
+	NonceStr string `json:"noncestr"`
+	// Package 固定值
+	Package string `json:"package"`
+	// Timestamp 时间戳（单位：秒）
+	Timestamp string `json:"timestamp"`
+	// Sign 签名
+	Sign string `json:"sign"`
 }
 
 type DiscountInfo struct {
