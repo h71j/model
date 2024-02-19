@@ -64,10 +64,10 @@ type Model struct {
 }
 
 type UserInfo struct {
-	Mobile    string `json:"mobile" bson:"user_mobile"`
-	UserName  string `json:"user_name" bson:"user_name"`
-	UserId    string `json:"user_id" bson:"user_id"`
-	AccountId string `json:"account_id" bson:"account_id"`
+	Mobile    string `json:"mobile"`
+	UserName  string `json:"user_name"`
+	UserId    string `json:"user_id"`
+	AccountId string `json:"account_id"`
 }
 
 type OrderInfo struct {
