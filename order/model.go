@@ -65,9 +65,9 @@ type Model struct {
 
 type UserInfo struct {
 	Mobile    string `json:"mobile"`
-	UserName  string `json:"user_name"`
-	UserId    string `json:"user_id"`
-	AccountId string `json:"account_id"`
+	UserName  string `json:"username"`
+	UserId    string `json:"id"`
+	AccountId string `json:"account"`
 }
 
 type OrderInfo struct {
