@@ -1,6 +1,7 @@
 package order
 
 import (
+	"github.com/h71j/model/goods"
 	"github.com/open4go/model"
 	"github.com/open4go/req5rsp/cst"
 	"go.mongodb.org/mongo-driver/bson/primitive"
@@ -58,7 +59,8 @@ type Model struct {
 	Pay      PayInfo        `json:"pay"  bson:"pay"`
 	Store    StoreInfo      `json:"store"  bson:"store"`
 	Discount []DiscountInfo `json:"discount"  bson:"discount"`
-	Goods    []GoodInfo     `json:"goods" bson:"goods"`
+	Goods    []*GoodInfo    `json:"goods" bson:"goods"` // Deprecated: Use Buckets instead
+	Buckets  []*Buckets     `json:"buckets" bson:"buckets"`
 	TakeOut  TakeOut        `json:"take_out" bson:"take_out"`
 	Applies  []*Apply       `json:"applies" bson:"applies"` // 申请记录：取消订单或退款
 }
@@ -141,6 +143,18 @@ type GoodInfo struct {
 	Image        string `json:"image"`
 	Amount       string `json:"amount"`
 	Name         string `json:"name"`
+}
+
+type Buckets struct {
+	ID           string               `json:"id"`
+	Number       int                  `json:"number"`
+	OriginAmount string               `json:"origin_amount"  bson:"origin_amount"`
+	Price        string               `json:"price"`
+	Unit         string               `json:"unit"`
+	Property     []goods.PropertyInfo `json:"property"`
+	Image        string               `json:"image"`
+	Amount       string               `json:"amount"`
+	Name         string               `json:"name"`
 }
 
 // TakeOut 外卖订单信息
