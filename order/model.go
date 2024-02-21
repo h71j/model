@@ -54,7 +54,8 @@ type Model struct {
 	SendStatus       int                `json:"send_status" bson:"send_status"`
 	QueueIndex       int64              `json:"queue_index" bson:"queue_index"`
 
-	User     UserInfo       `json:"user"  bson:"user"`
+	User     UserInfo       `json:"user"  bson:"user"` // Deprecated: Use Customer instead
+	Customer Customer       `json:"customer"  bson:"customer"`
 	Order    OrderInfo      `json:"order"  bson:"order"`
 	Pay      PayInfo        `json:"pay"  bson:"pay"`
 	Store    StoreInfo      `json:"store"  bson:"store"`
@@ -70,6 +71,13 @@ type UserInfo struct {
 	UserName  string `json:"username"`
 	UserId    string `json:"id"`
 	AccountId string `json:"account"`
+}
+
+type Customer struct {
+	Mobile  string `json:"phone"`
+	Name    string `json:"name"`
+	Id      string `json:"id"`
+	Account string `json:"account"`
 }
 
 type OrderInfo struct {
