@@ -56,6 +56,7 @@ type Model struct {
 	Content       string         `json:"content"`
 	UseProperty   int            `json:"use_property" bson:"use_property"`
 	IsUseProperty bool           `json:"is_use_property" bson:"is_use_property"`
+	CategoryID    string         `json:"category_id" bson:"category_id"`
 	Property      []PropertyInfo `json:"property"`
 
 	// 统计数据 & 限制
