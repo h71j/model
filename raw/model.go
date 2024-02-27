@@ -55,6 +55,9 @@ type Model struct {
 	StoreCondition   string             `json:"store_condition"`
 	Remark           string             `json:"remark"`
 	Tag              []string           `json:"tag"`
+	MainSupplier     string             `json:"main_supplier" bson:"main_supplier"`
+	SupplierList     []string           `json:"supplier" bson:"supplier"`
+	UnitCode         int                `json:"unit_code" bson:"unit_code"`
 }
 
 // ResourceName 返回资源名称
