@@ -68,6 +68,8 @@ type Profile struct {
 	CardName string `json:"card_name" bson:"card_name"`
 	// 卡地址
 	CardUrl string `json:"card_url" bson:"card_url"`
+	// 邀请人 (如果是注册时通过邀请人完成注册的，则这里填写邀请人的身份信息)
+	ParentID string `json:"parent_id" bson:"parent_id"`
 }
 
 type Safe struct {
