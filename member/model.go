@@ -74,11 +74,15 @@ type Safe struct {
 	// 最近一次登陆
 	LastLoginTime time.Time `json:"last_login_time" bson:"last_login_time"`
 	// 最近一次访问来源
-	LastLoginFrom time.Time `json:"last_login_from" bson:"last_login_from"`
+	LastLoginFrom string `json:"last_login_from" bson:"last_login_from"`
 	// 最近一次访问ip
-	LastLoginIp time.Time `json:"last_login_ip" bson:"last_login_ip"`
-	// 最近一次下单
-	LastPlace time.Time `json:"last_place" bson:"last_place"`
+	LastLoginIp string `json:"last_login_ip" bson:"last_login_ip"`
+	// 最近一次下单(订单id)
+	LastPlace string `json:"last_place" bson:"last_place"`
+	// 在线时长(秒)
+	OnlineSecond uint64 `json:"online_second" bson:"online_second"`
+	// 登陆次数
+	LoginTimes uint64 `json:"login_times" bson:"login_times"`
 }
 
 type AssetsInfo struct {
