@@ -3,6 +3,7 @@ package member
 import (
 	"github.com/open4go/model"
 	"go.mongodb.org/mongo-driver/bson/primitive"
+	"time"
 )
 
 const (
@@ -34,35 +35,65 @@ type Model struct {
 	ID primitive.ObjectID `json:"id" bson:"_id,omitempty"`
 	// 第三方账号信息
 	External ExternalInfo `json:"external" bson:"external"`
-	// 手机号
-	Phone string `json:"phone"`
-	// 更多信息
-	// 账号名称
-	Nickname string     `json:"nickname"`
-	Avatar   string     `json:"avatar"`
-	Member   MemberInfo `json:"member" bson:"member"`
-	Assets   AssetsInfo `json:"assets" bson:"assets"`
+	// 个人简介
+	Member Profile `json:"member" bson:"member"`
+	// 资产管理
+	Assets AssetsInfo `json:"assets" bson:"assets"`
+	// 安全
+	Safe Safe `json:"safe" bson:"safe"`
 }
 
 type ExternalInfo struct {
 	OpenID string `json:"open_id"  bson:"open_id"`
+	// 注册来源 （微信/支付宝/抖音)
+	From string `json:"from"  bson:"from"`
 }
 
-type MemberInfo struct {
-	Level    int    `json:"level"`
-	Gender   int    `json:"gender"`
+type Profile struct {
+	// 手机号
+	Phone string `json:"phone"`
+	// 账号名称
+	Nickname string `json:"nickname"`
+	// 真实姓名
+	Name string `json:"name"`
+	// 头像
+	Avatar string `json:"avatar"`
+	// 等级
+	Level int `json:"level"`
+	// 性别
+	Gender int `json:"gender"`
+	// 生日
 	Birthday string `json:"birthday"`
+	// 卡
 	CardName string `json:"card_name" bson:"card_name"`
-	CardUrl  string `json:"cardUrl" bson:"cardUrl"`
+	// 卡地址
+	CardUrl string `json:"card_url" bson:"card_url"`
+}
+
+type Safe struct {
+	// 最近一次登陆
+	LastLoginTime time.Time `json:"last_login_time" bson:"last_login_time"`
+	// 最近一次访问来源
+	LastLoginFrom time.Time `json:"last_login_from" bson:"last_login_from"`
+	// 最近一次访问ip
+	LastLoginIp time.Time `json:"last_login_ip" bson:"last_login_ip"`
+	// 最近一次下单
+	LastPlace time.Time `json:"last_place" bson:"last_place"`
 }
 
 type AssetsInfo struct {
-	PointNum     int     `json:"pointNum" bson:"pointNum"`
-	CouponNum    int     `json:"couponNum" bson:"couponNum"`
-	Balance      float64 `json:"balance" bson:"balance"`
-	GiftBalance  int     `json:"giftBalance" bson:"giftBalance"`
-	CurrentValue int     `json:"currentValue" bson:"currentValue"`
-	NeedValue    int     `json:"needValue" bson:"needValue"`
+	// 点数
+	PointNum int `json:"pointNum" bson:"pointNum"`
+	// 积分
+	CouponNum int `json:"couponNum" bson:"couponNum"`
+	// 余额
+	Balance float64 `json:"balance" bson:"balance"`
+	// 礼物
+	GiftBalance int `json:"giftBalance" bson:"giftBalance"`
+	// 当前邀请人完成值
+	CurrentValue int `json:"currentValue" bson:"currentValue"`
+	// 还需要完成值
+	NeedValue int `json:"needValue" bson:"needValue"`
 }
 
 // ResourceName 返回资源名称
