@@ -63,6 +63,8 @@ type Model struct {
 	// 门店的餐桌二维码
 	TableQrCodes []Qrcode     `json:"table_qrcodes"  bson:"table_qrcodes"`
 	MenuList     []MenuConfig `json:"menu_list" bson:"menu_list"`
+	// Printer 打印机配置
+	Printer PrinterConf `json:"printer_conf" bson:"printer_conf"`
 }
 
 type MenuConfig struct {
@@ -72,6 +74,20 @@ type MenuConfig struct {
 	Stock int `json:"stock"`
 	// MenuID
 	MenuID string `json:"menu_id"  bson:"menu_id"`
+}
+
+type PrinterConf struct {
+	// 前台打印机
+	Front Printer `json:"front"  bson:"front"`
+	// 后厨打印机
+	Kitchen Printer `json:"kitchen"  bson:"kitchen"`
+}
+
+type Printer struct {
+	Sn      string `json:"sn"  bson:"sn"`
+	User    string `json:"user"  bson:"user"`
+	UserKey string `json:"user_key"  bson:"UserKey"`
+	Debug   string `json:"debug"  bson:"debug"`
 }
 
 // ResourceName 返回资源名称
