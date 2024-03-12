@@ -86,7 +86,7 @@ type PrinterConf struct {
 type Printer struct {
 	Sn      string `json:"sn"  bson:"sn"`
 	User    string `json:"user"  bson:"user"`
-	UserKey string `json:"user_key"  bson:"UserKey"`
+	UserKey string `json:"user_key"  bson:"user_key"`
 	Debug   string `json:"debug"  bson:"debug"`
 }
 
