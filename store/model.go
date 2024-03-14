@@ -65,6 +65,15 @@ type Model struct {
 	MenuList     []MenuConfig `json:"menu_list" bson:"menu_list"`
 	// Printer 打印机配置
 	Printer PrinterConf `json:"printer_conf" bson:"printer_conf"`
+	// 财务主体
+	Finance FinanceConfig `json:"finance" bson:"finance"`
+}
+
+type FinanceConfig struct {
+	// WxPay 微信支付
+	WxPay string `json:"wx_pay"  bson:"wx_pay"`
+	// 银行支付
+	BankPay string `json:"bank_pay" bson:"bank_pay"`
 }
 
 type MenuConfig struct {
