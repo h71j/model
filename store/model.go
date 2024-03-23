@@ -17,6 +17,38 @@ const (
 	modelName = "store"
 )
 
+// BusinessOperationModel 是商业运营模式的枚举类型
+type BusinessOperationModel int
+
+const (
+	// CompanyOwned 直营模式
+	CompanyOwned BusinessOperationModel = iota
+	// Franchise 加盟模式
+	Franchise
+	// Licensing 特许经营模式
+	Licensing
+	// Agency 代理商模式
+	Agency
+	// Distribution 分销模式
+	Distribution
+	// Partnership 合作伙伴关系模式
+	Partnership
+	// JointVenture 联营模式
+	JointVenture
+)
+
+// OpenScale 表示门店规模的枚举
+type OpenScale int
+
+const (
+	// Small 小型门店
+	Small OpenScale = iota
+	// Medium 中型门店
+	Medium
+	// Large 大型门店
+	Large
+)
+
 // LbsInfo 地址
 type LbsInfo struct {
 	Address   string  `json:"address" bson:"address"`
@@ -29,6 +61,14 @@ type LbsInfo struct {
 type ShopTimeSetting struct {
 	BeginTime string `json:"begin_time" bson:"begin_time"`
 	EndTime   string `json:"end_time" bson:"end_time"`
+}
+
+// TypeInfo 门店类型
+type TypeInfo struct {
+	// 商业运营模式的枚举类型
+	BOM BusinessOperationModel `json:"bom" bson:"bom"`
+	// 门店规模
+	OS OpenScale `json:"os" bson:"os"`
 }
 
 // Model 门店信息
@@ -67,6 +107,8 @@ type Model struct {
 	Printer PrinterConf `json:"printer_conf" bson:"printer_conf"`
 	// 财务主体
 	Finance FinanceConfig `json:"finance" bson:"finance"`
+	// 门店类型属性设置
+	ST TypeInfo `json:"st" bson:"st"`
 }
 
 type FinanceConfig struct {
