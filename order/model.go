@@ -19,26 +19,6 @@ const (
 	modelName = "command"
 )
 
-const (
-	OrderStatusCreate     = 1 // 已下单
-	OrderStatusCooking    = 2 // 制餐中
-	OrderStatusGetOrder   = 3 // 待取餐
-	OrderStatusTakeOut    = 4 // 已出餐/外派中
-	OrderStatusFinish     = 5 // 订单已完成
-	OrderStatusCancel     = 6 // 订单已取消
-	OrderStatusRefuse     = 7 // 订单已拒绝退款
-	OrderStatusRetund     = 8 // 订单已退款
-	OrderStatusRetundDone = 9 // 订单待审批
-)
-
-// LbsInfo 地址
-type LbsInfo struct {
-	Address   string  `json:"address" bson:"address"`
-	Longitude float64 `json:"longitude"  bson:"longitude"`
-	Latitude  float64 `json:"latitude"  bson:"latitude"`
-	AreaName  string  `json:"areaName"  bson:"areaName"`
-}
-
 // Model 门店信息
 type Model struct {
 	// 模型继承
@@ -54,16 +34,23 @@ type Model struct {
 	SendStatus       int                `json:"send_status" bson:"send_status"`
 	QueueIndex       int64              `json:"queue_index" bson:"queue_index"`
 
-	User     UserInfo       `json:"user"  bson:"user"` // Deprecated: Use Customer instead
-	Customer Customer       `json:"customer"  bson:"customer"`
-	Order    OrderInfo      `json:"order"  bson:"order"`
-	Pay      PayInfo        `json:"pay"  bson:"pay"`
-	Store    StoreInfo      `json:"store"  bson:"store"`
+	// 消费者信息
+	Customer Customer  `json:"customer"  bson:"customer"`
+	Order    OrderInfo `json:"order"  bson:"order"`
+	// 支付信息
+	Pay PayInfo `json:"pay"  bson:"pay"`
+	// 门店信息
+	Store StoreInfo `json:"store"  bson:"store"`
+	// 折扣信息
 	Discount []DiscountInfo `json:"discount"  bson:"discount"`
-	Goods    []*GoodInfo    `json:"goods" bson:"goods"` // Deprecated: Use Buckets instead
-	Buckets  []*Buckets     `json:"buckets" bson:"buckets"`
-	TakeOut  TakeOut        `json:"take_out" bson:"take_out"`
-	Applies  []*Apply       `json:"applies" bson:"applies"` // 申请记录：取消订单或退款
+	// 商品列表
+	Buckets []*Buckets `json:"buckets" bson:"buckets"`
+	// 外卖信息
+	TakeOut TakeOut `json:"take_out" bson:"take_out"`
+	// 售后申请
+	Applies []*Apply `json:"applies" bson:"applies"` // 申请记录：取消订单或退款
+	// 订单来源
+	From cst.OrderFrom `json:"from" bson:"from"`
 }
 
 type UserInfo struct {
@@ -97,16 +84,17 @@ type OrderInfo struct {
 }
 
 type PayInfo struct {
-	CouponAmount string  `json:"coupon_amount"  bson:"coupon_amount"`
-	PayedAt      int     `json:"payed_at" bson:"payed_at"`
-	TotalAmount  string  `json:"total_amount" bson:"total_amount"`
-	CouponName   string  `json:"coupon_name" bson:"coupon_name"`
-	ReceiveAt    int     `json:"receive_at" bson:"receive_at"`
-	PayMode      string  `json:"pay_mode" bson:"pay_mode"`
-	Amount       string  `json:"amount"`
-	PayUserName  string  `json:"pay_user_name" bson:"pay_user_name"`
-	Status       string  `json:"status"` // 支付状态 0未支付 1已支付 2退款中 3已退款
-	WxTrade      WxTrade `json:"wx_trade"`
+	CouponAmount string          `json:"coupon_amount"  bson:"coupon_amount"`
+	PayedAt      int             `json:"payed_at" bson:"payed_at"`
+	TotalAmount  string          `json:"total_amount" bson:"total_amount"`
+	CouponName   string          `json:"coupon_name" bson:"coupon_name"`
+	ReceiveAt    int             `json:"receive_at" bson:"receive_at"`
+	PayMode      string          `json:"pay_mode" bson:"pay_mode"`
+	Amount       string          `json:"amount"`
+	PayUserName  string          `json:"pay_user_name" bson:"pay_user_name"`
+	Status       string          `json:"status"` // 支付状态 0未支付 1已支付 2退款中 3已退款
+	WxTrade      WxTrade         `json:"wx_trade"`
+	Channel      cst.ChannelType `json:"channel" bson:"channel"`
 }
 
 // WxTrade 微信支付返回信息
