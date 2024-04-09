@@ -91,6 +91,8 @@ type PayInfo struct {
 	//PayMode      string  `json:"pay_mode" bson:"pay_mode"`
 	//PayUserName  string  `json:"pay_user_name" bson:"pay_user_name"`
 
+	// 预支付信息
+	PreTrade PrepareTrade `json:"prepare_trade" bson:"prepare_trade"`
 	// Amount 显示金额
 	Amount string `json:"amount"`
 	// 支付总金额(单位：分）
@@ -109,9 +111,10 @@ type PayInfo struct {
 	Status cst.PayStatus `json:"status" bson:"status"`
 }
 
-// WxTrade 微信支付返回信息
-type WxTrade struct {
-	TransactionId string `json:"transaction_id"`
+// PrepareTrade 预支付返回信息
+// 例如：微信下单后产生的签名值
+// 可以用于继续完成支付
+type PrepareTrade struct {
 	// NonceStr 随机字符串
 	NonceStr string `json:"noncestr"`
 	// Package 固定值
