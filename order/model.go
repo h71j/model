@@ -84,17 +84,29 @@ type OrderInfo struct {
 }
 
 type PayInfo struct {
-	CouponAmount string          `json:"coupon_amount"  bson:"coupon_amount"`
-	PayedAt      int             `json:"payed_at" bson:"payed_at"`
-	TotalAmount  string          `json:"total_amount" bson:"total_amount"`
-	CouponName   string          `json:"coupon_name" bson:"coupon_name"`
-	ReceiveAt    int             `json:"receive_at" bson:"receive_at"`
-	PayMode      string          `json:"pay_mode" bson:"pay_mode"`
-	Amount       string          `json:"amount"`
-	PayUserName  string          `json:"pay_user_name" bson:"pay_user_name"`
-	Status       string          `json:"status"` // 支付状态 0未支付 1已支付 2退款中 3已退款
-	WxTrade      WxTrade         `json:"wx_trade"`
-	Channel      cst.ChannelType `json:"channel" bson:"channel"`
+	//CouponAmount string  `json:"coupon_amount"  bson:"coupon_amount"`
+	//TotalAmount  string  `json:"total_amount" bson:"total_amount"`
+	//CouponName   string  `json:"coupon_name" bson:"coupon_name"`
+	//ReceiveAt    int     `json:"receive_at" bson:"receive_at"`
+	//PayMode      string  `json:"pay_mode" bson:"pay_mode"`
+	//PayUserName  string  `json:"pay_user_name" bson:"pay_user_name"`
+
+	// Amount 显示金额
+	Amount string `json:"amount"`
+	// 支付总金额(单位：分）
+	PayAmount int64 `json:"pay_amount" bson:"pay_amount"`
+	// 第三方支付单号
+	TransactionID string `json:"transaction_id" bson:"transaction_id"`
+	// 支付成功时间
+	PayedAt int `json:"payed_at" bson:"payed_at"`
+	// 退款成功时间
+	RefundedAt int `json:"refunded_at" bson:"refunded_at"`
+	// Channel 支付渠道
+	Channel cst.ChannelType `json:"channel" bson:"channel"`
+	// Method 支付方式
+	Method cst.PayMethod `json:"method" bson:"method"`
+	// Status 支付状态 0未支付 1已支付 2退款中 3已退款
+	Status cst.PayStatus `json:"status" bson:"status"`
 }
 
 // WxTrade 微信支付返回信息
