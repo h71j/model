@@ -103,8 +103,9 @@ type Model struct {
 	// 门店的餐桌二维码
 	TableQrCodes []Qrcode     `json:"table_qrcodes"  bson:"table_qrcodes"`
 	MenuList     []MenuConfig `json:"menu_list" bson:"menu_list"`
-	// Printer 打印机配置
-	Printer PrinterConf `json:"printer_conf" bson:"printer_conf"`
+	// Printer 打印机列表
+	// 可以支持多个打印机
+	Printer []Printer `json:"printer_conf" bson:"printer_conf"`
 	// 财务主体
 	Finance FinanceConfig `json:"finance" bson:"finance"`
 	// 门店类型属性设置
@@ -127,18 +128,15 @@ type MenuConfig struct {
 	MenuID string `json:"menu_id"  bson:"menu_id"`
 }
 
-type PrinterConf struct {
-	// 前台打印机
-	Front Printer `json:"front"  bson:"front"`
-	// 后厨打印机
-	Kitchen Printer `json:"kitchen"  bson:"kitchen"`
-}
-
 type Printer struct {
-	Sn      string `json:"sn"  bson:"sn"`
-	User    string `json:"user"  bson:"user"`
-	UserKey string `json:"user_key"  bson:"user_key"`
-	Debug   string `json:"debug"  bson:"debug"`
+	// 备注
+	Remark string `json:"remark"  bson:"remark"`
+	// 打印机id
+	PrinterID string `json:"printer_id"  bson:"printer_id"`
+	// 模版id
+	TplID string `json:"tpl_id"  bson:"tpl_id"`
+	// 是否启用
+	Enabled bool `json:"enabled"  bson:"enabled"`
 }
 
 // ResourceName 返回资源名称
