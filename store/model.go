@@ -103,6 +103,8 @@ type Model struct {
 	// 门店的餐桌二维码
 	TableQrCodes []Qrcode     `json:"table_qrcodes"  bson:"table_qrcodes"`
 	MenuList     []MenuConfig `json:"menu_list" bson:"menu_list"`
+	// 菜单id
+	Menus []primitive.ObjectID `json:"menus" bson:"menus"`
 	// Printer 打印机列表
 	// 可以支持多个打印机
 	Printer []Printer `json:"printer_conf" bson:"printer_conf"`

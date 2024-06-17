@@ -18,14 +18,6 @@ const (
 	modelName = "account"
 )
 
-// LbsInfo 地址
-type LbsInfo struct {
-	Address   string  `json:"address" bson:"address"`
-	Longitude float64 `json:"longitude"  bson:"longitude"`
-	Latitude  float64 `json:"latitude"  bson:"latitude"`
-	AreaName  string  `json:"areaName"  bson:"areaName"`
-}
-
 // Model 门店信息
 type Model struct {
 	// 模型继承
