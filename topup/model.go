@@ -40,6 +40,8 @@ type Model struct {
 	FullImage  string             `json:"full_image"   bson:"full_image"`
 	Name       string             `json:"name"   bson:"name"`
 	SellPrice  string             `json:"sell_price"   bson:"sell_price"`
+	// 商户id (商品需要选择对应的销售门店)
+	MerchantId string `json:"merchant_id"   bson:"merchant_id"`
 }
 
 // ResourceName 返回资源名称
