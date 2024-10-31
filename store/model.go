@@ -2,6 +2,7 @@ package store
 
 import (
 	"github.com/open4go/model"
+	"github.com/open4go/req5rsp/cst"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
@@ -112,6 +113,8 @@ type Model struct {
 	Finance FinanceConfig `json:"finance" bson:"finance"`
 	// 门店类型属性设置
 	ST TypeInfo `json:"st" bson:"st"`
+	// 座位配置
+	Seat []SeatConfig `json:"seat" bson:"seat"`
 }
 
 type FinanceConfig struct {
@@ -139,6 +142,17 @@ type Printer struct {
 	TplID string `json:"tpl_id"  bson:"tpl_id"`
 	// 是否启用
 	Enabled bool `json:"enabled"  bson:"enabled"`
+}
+
+type SeatConfig struct {
+	// Name 名称
+	Name string `json:"name"`
+	// Status 状态
+	Status cst.SeatStatus `json:"status"`
+	// ID
+	ID string `json:"id"  bson:"id"`
+	// Type 大/中/小/
+	Type string `json:"type"  bson:"type"`
 }
 
 // ResourceName 返回资源名称
