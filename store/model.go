@@ -153,6 +153,10 @@ type SeatConfig struct {
 	ID string `json:"id"  bson:"id"`
 	// Type 大/中/小/
 	Type string `json:"type"  bson:"type"`
+	// Background 背景图
+	Background string `json:"background"  bson:"background"`
+	// Rate 使用率
+	Rate string `json:"rate"  bson:"rate"`
 }
 
 // ResourceName 返回资源名称
