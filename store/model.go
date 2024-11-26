@@ -115,6 +115,8 @@ type Model struct {
 	ST TypeInfo `json:"st" bson:"st"`
 	// 座位配置
 	Seat []SeatConfig `json:"seat" bson:"seat"`
+	// 当前门店的管理员
+	Manager []string `json:"manager" bson:"manager"`
 }
 
 type FinanceConfig struct {
