@@ -124,7 +124,7 @@ type Model struct {
 	ThemeCode int `json:"theme_code" bson:"theme_code"`
 	// 主题背景
 	Background int `json:"background" bson:"background"`
-	// 门店主推新品/新闻
+	// 门店主推新品
 	News int `json:"news" bson:"news"`
 }
 
