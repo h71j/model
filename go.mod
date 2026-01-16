@@ -5,11 +5,11 @@ go 1.24.0
 require (
 	github.com/gin-gonic/gin v1.9.1
 	github.com/google/uuid v1.6.0
-	github.com/open4go/model v0.0.23
+	github.com/open4go/model v0.0.24
 	github.com/open4go/req5rsp v0.1.42
 	github.com/r2day/base v1.6.7
 	github.com/r2day/db v0.3.5
-	github.com/redis/go-redis/v9 v9.0.5
+	github.com/redis/go-redis/v9 v9.7.3
 	github.com/sirupsen/logrus v1.9.3
 	go.mongodb.org/mongo-driver v1.17.3
 )
