@@ -126,6 +126,8 @@ type Model struct {
 	Background int `json:"background" bson:"background"`
 	// 门店主推新品
 	News int `json:"news" bson:"news"`
+	// 下单方式
+	PlaceOrderMode int `json:"place_order_mode" bson:"place_order_mode"`
 }
 
 type FinanceConfig struct {
