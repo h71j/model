@@ -97,6 +97,8 @@ type Model struct {
 	ShopTimeInfo ShopTimeSetting `json:"shop_time_info" bson:"shop_time_info"`
 	// 门店电话
 	CallNumber string `json:"callNumber" bson:"callNumber"`
+	// Mobile 座机号
+	Mobile string `json:"mobile" bson:"mobile"`
 	// 地址
 	Lbs LbsInfo `json:"lbs" bson:"lbs"`
 	// 当前门店拥有的产品
@@ -115,6 +117,8 @@ type Model struct {
 	ST TypeInfo `json:"st" bson:"st"`
 	// 座位配置
 	Seat []SeatConfig `json:"seat" bson:"seat"`
+	// 桌位平面布局
+	Layout TableLayout `json:"layout" bson:"layout"`
 	// 当前门店的管理员
 	Manager []string `json:"manager" bson:"manager"`
 
@@ -128,6 +132,10 @@ type Model struct {
 	News int `json:"news" bson:"news"`
 	// 下单方式
 	PlaceOrderMode int `json:"place_order_mode" bson:"place_order_mode"`
+	// ScmConsumeEnabled 是否关联供应链并在制作完成时自动扣原料库存。默认 false：不关联、不扣料。
+	ScmConsumeEnabled bool `json:"scm_consume_enabled" bson:"scm_consume_enabled"`
+	// ScmBlockOnShortage 库存不足时是否阻断制作完成。默认 false：允许负库存并继续出餐。
+	ScmBlockOnShortage bool `json:"scm_block_on_shortage" bson:"scm_block_on_shortage"`
 }
 
 type FinanceConfig struct {
@@ -135,6 +143,61 @@ type FinanceConfig struct {
 	WxPay string `json:"wx_pay"  bson:"wx_pay"`
 	// 银行支付
 	BankPay string `json:"bank_pay" bson:"bank_pay"`
+	// LakalaPay 拉卡拉密钥文档 id，对应 finance_keys_config。
+	LakalaPay string `json:"lakala_pay" bson:"lakala_pay,omitempty"`
+	// Channels POS 支付入口开关
+	Channels PayChannelFlags `json:"channels" bson:"channels"`
+}
+
+type PayChannelFlags struct {
+	Cash    bool `json:"cash" bson:"cash"`
+	WeChat  bool `json:"wechat" bson:"wechat"`
+	Balance bool `json:"balance" bson:"balance"`
+	Lakala  bool `json:"lakala" bson:"lakala"`
+	// Default 是 cash|wechat|balance|lakala 之一。
+	Default string `json:"default,omitempty" bson:"default,omitempty"`
+}
+
+func enabledChannelKeys(c PayChannelFlags) []string {
+	var keys []string
+	if c.Cash {
+		keys = append(keys, "cash")
+	}
+	if c.WeChat {
+		keys = append(keys, "wechat")
+	}
+	if c.Lakala {
+		keys = append(keys, "lakala")
+	}
+	if c.Balance {
+		keys = append(keys, "balance")
+	}
+	return keys
+}
+
+func (f FinanceConfig) ResolvedChannels() PayChannelFlags {
+	c := f.Channels
+	if !c.Cash && !c.WeChat && !c.Balance && !c.Lakala {
+		return PayChannelFlags{Cash: true, Default: "cash"}
+	}
+	enabled := enabledChannelKeys(c)
+	if len(enabled) == 1 {
+		c.Default = enabled[0]
+		return c
+	}
+	if !channelEnabled(enabled, c.Default) {
+		c.Default = enabled[0]
+	}
+	return c
+}
+
+func channelEnabled(enabled []string, key string) bool {
+	for _, item := range enabled {
+		if item == key {
+			return true
+		}
+	}
+	return false
 }
 
 type MenuConfig struct {
@@ -157,19 +220,35 @@ type Printer struct {
 	Enabled bool `json:"enabled"  bson:"enabled"`
 }
 
+type TableLayout struct {
+	Cols   int `json:"cols" bson:"cols"`
+	Rows   int `json:"rows" bson:"rows"`
+	Width  int `json:"width" bson:"width"`
+	Height int `json:"height" bson:"height"`
+	// QrDisplay is what the mini-program shows after a table QR scan:
+	// table_no (default), name, or id.
+	QrDisplay string `json:"qr_display" bson:"qr_display"`
+}
+
 type SeatConfig struct {
-	// Name 名称
-	Name string `json:"name"`
-	// Status 状态
-	Status cst.SeatStatus `json:"status"`
-	// ID
-	ID string `json:"id"  bson:"id"`
-	// Type 大/中/小/
-	Type string `json:"type"  bson:"type"`
-	// Background 背景图
-	Background string `json:"background"  bson:"background"`
-	// Rate 使用率
-	Rate string `json:"rate"  bson:"rate"`
+	Name       string         `json:"name" bson:"name"`
+	Status     cst.SeatStatus `json:"status" bson:"status"`
+	ID         string         `json:"id" bson:"id"`
+	TableNo    string         `json:"table_no" bson:"table_no"`
+	Type       string         `json:"type" bson:"type"`
+	Capacity   int            `json:"capacity" bson:"capacity"`
+	Area       string         `json:"area" bson:"area"`
+	X          int            `json:"x" bson:"x"`
+	Y          int            `json:"y" bson:"y"`
+	W          int            `json:"w" bson:"w"`
+	H          int            `json:"h" bson:"h"`
+	Background string         `json:"background" bson:"background"`
+	Rate       string         `json:"rate" bson:"rate"`
+	OccupiedAt int64          `json:"occupied_at" bson:"occupied_at"`
+	ReservedAt int64          `json:"reserved_at" bson:"reserved_at"`
+	OrderNo    string         `json:"order_no" bson:"order_no"`
+	People     int            `json:"people" bson:"people"`
+	Elapsed    int64          `json:"elapsed" bson:"-"`
 }
 
 // ResourceName 返回资源名称
