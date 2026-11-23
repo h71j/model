@@ -13,24 +13,32 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Set up Go
-        uses: actions/setup-go@v4
+        uses: actions/setup-go@v5
         with:
-          go-version: '1.24'
+          go-version: "1.26.11"
+          cache: true
+
+      - name: Download dependencies
+        run: go mod download
+
+      - name: Verify dependencies
+        run: go mod verify
 
       # 安全检查：Govulncheck 依赖漏洞扫描
       - name: Install govulncheck
         run: go install golang.org/x/vuln/cmd/govulncheck@latest
 
       - name: Run govulncheck
-        run: govulncheck -test=false $(go list ./... | grep -v vendor | grep -v 'opt/hostedtoolcache/go')
+        run: "$(go env GOPATH)/bin/govulncheck" -test=false ./...
 
       # 代码质量检查：Golangci-lint
       - name: Install golangci-lint
         run: |
-          curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.55.2
+          curl -sSfL https://golangci-lint.run/install.sh \
+            | sh -s -- -b "$(go env GOPATH)/bin" v2.13.2
 
       - name: Run golangci-lint
-        run: $(go env GOPATH)/bin/golangci-lint run --skip-dirs vendor --skip-dirs third_party ./... | grep -v 'opt/hostedtoolcache/go'
+        run: "$(go env GOPATH)/bin/golangci-lint" run --timeout=10m
 
       - name: Build
         run: go build -v ./...
